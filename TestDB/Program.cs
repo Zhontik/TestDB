@@ -6,9 +6,12 @@ namespace TestDB
     {
         static void Main(string[] args)
         {
-            DateTime startDate = new DateTime(2015, 5, 20);
+            /*DateTime startDate = new DateTime(2015, 5, 20);
             DateTime closeDate = new DateTime(2015, 7, 20);
-            //Console.WriteLine(startDate.ToString("MMM"));
+            string q = startDate.ToString("MMM") + "qwe";
+            closeDate.AddYears(-18);
+            Console.WriteLine(closeDate.AddYears(-18));
+            AbstractPolis qwe = new AbstractPolis();*/
         }
     }
 }
