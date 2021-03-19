@@ -7,7 +7,16 @@ namespace TestDB
 {
     class ApplicationContext : DbContext
     {
-        public DbSet<AbstractPolis> polises { get; set; }
+        public ApplicationContext()
+        {
+            Database.EnsureCreated();
+        }
 
+        public DbSet <AbstractPolicy> Policies { get; set; }       
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=TestDB; Trusted_Connection=True;");
+        }
     }
 }

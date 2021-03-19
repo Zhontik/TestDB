@@ -7,17 +7,17 @@ namespace TestDB
 {
     public class AbstractPolicy
     {
-        
-        public readonly DateTime startDate;
-        public readonly DateTime closeDate;
-        [Key] public readonly string number;
-        public readonly string ownerName;
-        public readonly string ownerSurname;
-        public readonly DateTime birthDate;
-        public string insuredObjectName;
-        public string insuredObjectType;
-        public string status;
-        public DateTime lastUpdate;
+        [Key] public int Id { get; set; }
+        public string number { get; set; }
+        public DateTime closeDate { get; set; }
+        public DateTime startDate { get; set; }
+        public string ownerName { get; set; }
+        public string ownerSurname { get; set; }
+        public DateTime birthDate { get; set; }
+        public string insuredObjectName { get; set; }
+        public string insuredObjectType { get; set; }
+        public string status { get; set; }
+        public DateTime lastUpdate { get; set; }
 
         public AbstractPolicy(){}
 
