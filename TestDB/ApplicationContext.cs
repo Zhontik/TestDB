@@ -12,7 +12,7 @@ namespace TestDB
             Database.EnsureCreated();
         }
 
-        public DbSet <AbstractPolicy> Policies { get; set; }       
+        public DbSet <Policy> Policies { get; set; }       
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

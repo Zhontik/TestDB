@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace TestDB
 {
-    public class AbstractPolicy
+    public class Policy
     {
         [Key] public int Id { get; set; }
         public string number { get; set; }
@@ -19,7 +20,7 @@ namespace TestDB
         public string status { get; set; }
         public DateTime lastUpdate { get; set; }
 
-        public AbstractPolicy(){}
+        public Policy(){}
 
         /// <summary>
         /// Create already existed polis.
@@ -34,11 +35,11 @@ namespace TestDB
         /// <param name="insuredObjectType">Must be one of list: "Car","House","Life".</param>
         /// <param name="status">Must be one of list: "Active","Closed","Waiting".</param>
         /// <param name="lastUpdate">Date must be after start.</param>
-        public AbstractPolicy(DateTime startDate, DateTime closeDate, string number, string ownerName, string ownerSurname, DateTime birthDate, string insuredObjectName, string insuredObjectType, string status, DateTime lastUpdate)
+        /*public Policy(DateTime startDate, DateTime closeDate, int Id, string ownerName, string ownerSurname, DateTime birthDate, string insuredObjectName, string insuredObjectType, string status, DateTime lastUpdate)
         {
             this.startDate = startDate > DateTime.Now ? startDate : DateTime.Now;
             this.closeDate = closeDate > startDate ? closeDate : startDate;
-            this.number = number;
+            this.number = startDate.ToString("MMM", CultureInfo.CreateSpecificCulture("en-US")) + Id.ToString(); ;
             this.ownerName = ownerName;
             this.ownerSurname = ownerSurname;
             this.birthDate = DateTime.Now.Subtract(birthDate) > TimeSpan.FromSeconds(1) ? birthDate : DateTime.Now.AddYears(-18);
@@ -46,7 +47,7 @@ namespace TestDB
             this.insuredObjectType = insuredObjectType;
             this.status = status;
             this.lastUpdate = lastUpdate > startDate ? lastUpdate : startDate;
-        }
+        }*/
 
         /// <summary>
         /// Create new Polis.
@@ -58,18 +59,18 @@ namespace TestDB
         /// <param name="ownerSurname"><Can't be changed./param>
         /// <param name="birthDate">Owner must be 18+. Can't be changed.</param>
         /// <param name="insuredObjectName"></param>
-        /// <param name="insuredObjectType">Must be one of list: "Car","House","Life".</param>
-        public AbstractPolicy(DateTime startDate, DateTime closeDate, int Id, string ownerName, string ownerSurname, DateTime birthDate, string insuredObjectName, string insuredObjectType)
+        /// <param name="insuredObjectType">Must be one of the list: "Car","House","Life".</param>
+        public Policy(DateTime startDate, DateTime closeDate, int Id, string ownerName, string ownerSurname, DateTime birthDate, string insuredObjectName, string insuredObjectType)
         {
-            this.startDate = startDate > DateTime.Now ? startDate : DateTime.Now;
+            this.startDate = startDate < DateTime.Now ? DateTime.Now : startDate;
             this.closeDate = closeDate > startDate ? closeDate : startDate;
-            this.number = startDate.ToString("MMM") + Id.ToString();
+            this.number = startDate.ToString("MMM", CultureInfo.CreateSpecificCulture("en-US")) + Id.ToString();
             this.ownerName = ownerName;
             this.ownerSurname = ownerSurname;
-            this.birthDate = DateTime.Now.Subtract(birthDate) > TimeSpan.FromSeconds(1) ? birthDate : DateTime.Now.AddYears(-18);
+            this.birthDate = DateTime.Now.Subtract(birthDate.AddYears(18)) > TimeSpan.FromSeconds(1) ? birthDate : DateTime.Now.AddYears(-18);
             this.insuredObjectName = insuredObjectName;
             this.insuredObjectType = insuredObjectType;
-            this.status = "Active";
+            this.status = DateTime.Now.Subtract(startDate) > TimeSpan.FromDays(1) ? "Waiting" : "Active";
             this.lastUpdate = startDate;
         }
     }
