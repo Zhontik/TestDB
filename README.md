@@ -7,38 +7,38 @@
 
 1 - Для создания нового полиса:
 
-  editor.AddNewPolicy(
+  /*editor.AddNewPolicy(
     new DateTime(2007, 8, 13),// start
     new DateTime(2007, 9, 24),// close
     "Alex", //name
     "Ads", //surname
     new DateTime(1937, 3, 5),//birth
     "MyHe",//Object name
-    "House")//Object type (must be "Car", "Life" or "House")
+    "House")//Object type (must be "Car", "Life" or "House")*/
                 
 2 - Обновление полиса:
   исходя из полей, что можно обновить оставалось только имя и тип страхуемого обьекта
   
-  editor.UpdatePolicy(
+  /*editor.UpdatePolicy(
     "Mar1", // номер полиса
     "insuredName", // имя поля, что надо обновить (must be "insuredName" or "insuredType")
-    "qwe"); // Новое значение
+    "qwe"); // Новое значение*/
     
 3 - Получить полис:
   выводит в консоль информацию о полисе по номеру и возвращает сам полис.
   
-  editor.FindNumber("Mar1"); // номер полиса
+  //editor.FindNumber("Mar1"); // номер полиса
   
 4 - Получить полисы по запросу:
   возвращает список плисов подходящих под условия или null, если таких нет.
   также выводит все полисы в консоль.
   
-  // param - это масссив который хранит запросы в виде массива из 2 элементов.
+   param - это масссив который хранит запросы в виде массива из 2 элементов.
   [0] - Слово запроса
   [1] - параметр запроса
   запрос может быть 1, а можно комбинировать несколько.
   
-  string[][] param = 
+  /*string[][] param = 
   {
       new string[] {"Name", "Alex"},
       new string[] {"Surname", "Alex"},
@@ -47,23 +47,35 @@
       new string[] {"Status", "Alex"},
       new string[] {"ObjectName", "Alex"}
   };             
-  editor.Get(param);
+  editor.Get(param);*/
+  
+  Вопросы:
+  
+  1 - Как можно нормально написать эти комбинированные запросы?
+  У меня был вариант с написанием запросов одиночными и хранением промежуточных результатов.
+  Собственно, единственное что для меня сильно непонятно так это тот факт, как красиво преобразовать запрос из строки или ещё чего в linq запрос к БД.
+  
+  2 - Чтобы сделать поля, которые нельзя менять после создания достаточносделать их private и потом сделать дополнительное public поле, что может только выдавать         значение из private поля?
+  
+  3 - 
   
   
   
+  Для тестирования части вещей есть закомментированный метод создания в классе Policy
+  Он позволяет создавать полисы в обход части проверок, можно создавать новые полисы в прошлом.
   
-                /*int num = datab.Policies.Count();
-                Policy qwe = new Policy(
-                    new DateTime(2007, 8, 13),//start
-                    new DateTime(2007, 9, 24),//close
-                    num++,
-                    "Xern",//name
-                    "Qwerty",//surname
-                    new DateTime(1937, 3, 5),//birth
-                    "MyHe",//OName  
-                    "House",//OType
-                    "Closed",//Status
-                    new DateTime(2007, 8, 13)//LastUpdate
-                    );
-                datab.Policies.Add(qwe);
-                datab.SaveChanges();*/
+  /*int num = datab.Policies.Count();
+  Policy pol = new Policy(
+      new DateTime(2007, 8, 13),//start
+      new DateTime(2007, 9, 24),//close
+      ++num,
+      "Xern",//name
+      "Qwerty",//surname
+      new DateTime(1937, 3, 5),//birth
+      "MyHe",//OName  
+      "House",//OType
+      "Closed",//Status
+      new DateTime(2007, 8, 13)//LastUpdate
+      );
+  datab.Policies.Add(pol);
+  datab.SaveChanges();*/
